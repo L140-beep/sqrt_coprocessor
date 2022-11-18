@@ -20,7 +20,7 @@
 %macro const_print 1
     pushd
     jmp %%print 
-    %%str db %1, 0xA
+    %%str db %1
     %%len equ $ - %%str
 %%print:  
     mov eax, 4
