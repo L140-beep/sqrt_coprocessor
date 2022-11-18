@@ -49,7 +49,7 @@ section .text
         mov [degree], eax
         mov ebx, [mantis]
         imul eax, [mantis]
-        const_print "Домноженная мантисса:"
+        const_print "Домноженная мантисса: "
         printd
         new_line
         mov [mantis], eax
@@ -77,6 +77,7 @@ section .text
         pow dword 2, [e]
         mul ebx 
 
+        const_print "Результат до деления: "
         printd
         new_line
 
@@ -84,6 +85,7 @@ section .text
         mov ebx, [degree]
         div ebx
 
+        const_print "Результат: "
         printd
         const_print ","
         mov eax, edx
