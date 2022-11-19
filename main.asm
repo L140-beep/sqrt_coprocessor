@@ -6,11 +6,15 @@
     mov ebx, eax
     mov ecx, %2
     dec ecx
-
+    cmp ecx, 0
+    jg %%_pow
+    jmp %%_exit
+    
 %%_pow:
     imul eax, ebx
     loop %%_pow
 
+%%_exit:
     pop edx
     pop ebx
     pop ecx
@@ -48,7 +52,14 @@ section .text
         pow dword 10, [perception]
         mov [degree], eax
         mov ebx, [mantis]
-        imul eax, [mantis]
+
+        ; fild qword [mantis]
+        ; fimul dword [degree]
+        ; fistp qword [mantis]
+
+        mov eax, [mantis]
+        imul eax, [degree]
+
         const_print "Домноженная мантисса: "
         printd
         new_line
@@ -57,7 +68,7 @@ section .text
         
         pow dword 2, dword 23
         
-        ;eax = 2^23
+        ;eax = 2^23z
 
         mov ebx, eax
         mov eax, [mantis]
@@ -75,6 +86,8 @@ section .text
         mov eax, ecx
         xor eax, eax
         pow dword 2, [e]
+        printd
+        new_line
         mul ebx 
 
         const_print "Результат до деления: "
@@ -98,10 +111,10 @@ section .text
     
 
 section .data
-    num dd 100.5
+    num dd 110.0
     perception dd 3
 section .bss
     degree resb 4
     result resb 1
-    mantis resb 5
+    mantis resb 6
     e resb 2
